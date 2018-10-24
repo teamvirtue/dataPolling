@@ -28,19 +28,16 @@ def function():
         response = requests.post("https://api.netatmo.com/api/getstationsdata", params=params)
         response.raise_for_status()
         data = response.json()["body"]["devices"][0]["dashboard_data"]
-	roomdata = {
-                "url": "http://localhost:8000/room/1/",
-                "room_id": "1",
+        roomdata = {
                 "room_name": "Livingroom",
                 "last_humidity": data['Humidity'],
                 "last_temperature": data['Temperature'],
                 "last_amount_CO2": data['CO2'],
                 "last_reading_time": datetime.datetime.utcfromtimestamp(data['time_utc']).strftime("%Y-%m-%d %H:%M:%S"),
                 "nr_of_appliances": 100,
-                "flat_id": "http://localhost:8000/flat/1/"
         }
 
-	patchData('room/1',roomdata)
+        getToken.patchData('room/1',roomdata)
     except requests.exceptions.HTTPError as error:
         print(error.response.status_code, error.response.text)
 

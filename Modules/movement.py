@@ -1,13 +1,15 @@
 # SUDO needed
 import time, gpio, getToken
 
-previous = {"155": 0}
+previous = {"155": 0, "160": 0, "158": 0}
 
 
 def run():
     while (1):
         check("155", 1)
-        time.sleep(1)
+        check("160", 2)
+        check("158", 3)
+        time.sleep(50)
 
 
 def check(sensor_id, db_id):

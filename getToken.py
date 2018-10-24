@@ -1,4 +1,9 @@
-import requests
+import requests,logging
+
+urllib3_logger = logging.getLogger('urllib3')
+urllib3_logger.setLevel(logging.CRITICAL)
+
+logging.getLogger('requests').setLevel(logging.CRITICAL)
 
 hosturl= 'http://192.168.0.50:8000/'
 token = ""
@@ -31,6 +36,7 @@ def patchData(EndPoint,Payload):
     headers = {"Authorization":"JWT "+token}
     r = requests.patch(url,headers=headers,data=Payload)
     print(r.status_code)
+    #print(r.text)
     if r.status_code == 401:
         token = getToken()
         return patchData(EndPoint, Payload)
