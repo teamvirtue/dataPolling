@@ -1,15 +1,17 @@
 # SUDO needed
-import time, gpio, getToken
+import time, gpio, getToken, logging
 
 previous = {"155": 0, "160": 0, "158": 0}
 
 
 def run():
-    while (1):
+    logging.getLogger('gpio').setLevel(logging.INFO)
+	
+    while 1:
         check("155", 1)
         check("160", 2)
         check("158", 3)
-        time.sleep(50)
+        time.sleep(5)
 
 
 def check(sensor_id, db_id):
